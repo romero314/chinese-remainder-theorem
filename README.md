@@ -22,3 +22,10 @@ Residues must satisfy `0 <= r < m`. Passing `r = m` or a negative residue raises
 - `solve(residues, moduli)` — returns the unique solution in `[0, product of moduli)`.
 - `NotCoprimeError` — raised when two moduli share a factor.
 - `ModulusTooSmallError` — raised when a residue is not in `[0, modulus)`.
+
+## Performance
+
+The window keeps a bounded buffer, so `push` is constant time and memory does not
+grow with the length of the stream. `peak` and `trough` are linear in the window
+size, which is the trade that keeps `push` cheap.
+
